@@ -2,19 +2,13 @@ import psycopg2
 import os
 
 password = os.getenv('PG_PASSWORD')
-user = os.getenv('PG_USER')
-host_db = os.getenv('PG_HOST_DB')
-database = os.getenv('PG_DB')
-
-if not all([password, user, host_db, database]):
-    raise ValueError("Erros vários! Verifique as envirtments")
 
 try:
     conn = psycopg2.connect(
-        dbname=database,
-        user=user,
+        dbname="db-fdp",
+        user="postgres",
         password=password,
-        host=host_db,
+        host="database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com",
         port="5432"
     )
 
@@ -29,6 +23,5 @@ except psycopg2.OperationalError as e:
     print(f"OperationalError: {e}")
 except Exception as e:
     print(f"An error occurred: {e}")
-
 
 
