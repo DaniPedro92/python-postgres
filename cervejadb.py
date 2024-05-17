@@ -1,27 +1,20 @@
 import psycopg2
 import os
 
-# Debugging: Print all environment variables to check if PG_PASSWORD is set
-print("All environment variables:")
-for key, value in os.environ.items():
-    print(f"{key}: {value}")
-
-# Retrieve the password from the environment variable
 password = os.getenv('PG_PASSWORD')
+user = os.getenv('PG_USER')
+host_db = os.getenv('PG_HOST_DB')
+database = os.getenv('PG_DB')
 
-# Check if the password was successfully retrieved
-if not password:
-    raise ValueError("No password provided. Please set the PG_PASSWORD environment variable.")
-
-# Debugging output to verify the password retrieval
-print(f"Password retrieved from environment: {password}")
+if not all([password, user, host_db, database]):
+    raise ValueError("Erros vários! Verifique as envirtments")
 
 try:
     conn = psycopg2.connect(
-        dbname="db-fdp",
-        user="postgres",
+        dbname=database,
+        user=user,
         password=password,
-        host="database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com",
+        host=host_db,
         port="5432"
     )
 
@@ -36,7 +29,6 @@ except psycopg2.OperationalError as e:
     print(f"OperationalError: {e}")
 except Exception as e:
     print(f"An error occurred: {e}")
-
 
 
 
