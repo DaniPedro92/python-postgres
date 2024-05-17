@@ -31,9 +31,9 @@ jobs:
         run: |
           echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" > test.env
           echo "PG_USER=${{ secrets.PG_USER }}" >> test.env
-          echo "PG_HOST=${{ vars.PG_HOST_DB }}" >> test.env
-          echo "PG_PORT=${{ vars.PG_PORT }}" >> test.env
-          echo "PG_DATABASE=${{ vars.PG_DB }}" >> test.env
+          echo "PG_HOST=${{ env.PG_HOST_DB }}" >> test.env
+          echo "PG_PORT=${{ env.PG_PORT }}" >> test.env
+          echo "PG_DATABASE=${{ env.PG_DB }}" >> test.env
           cat test.env
 
       - name: Read database file
