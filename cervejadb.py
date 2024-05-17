@@ -11,7 +11,7 @@ try:
         dbname=os.getenv('PG_DATABASE'),
         user=os.getenv('PG_USER'),
         password=os.getenv('PG_PASSWORD'),
-        host=os.getenv('PG_HOST'),
+        host=os.getenv('PG_HOST_DB'),
         port=os.getenv('PG_PORT')
     )
 
