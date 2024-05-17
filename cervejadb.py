@@ -1,17 +1,42 @@
 import psycopg2
+import os
 
-conn = psycopg2.connect(
-    dbname="db-fdp",
-    user="postgres",
-    password="Abcd1234!",
-    host="database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com",
-    port="5432"
-)
+# Debugging: Print all environment variables to check if PG_PASSWORD is set
+print("All environment variables:")
+for key, value in os.environ.items():
+    print(f"{key}: {value}")
 
-cursor = conn.cursor()
-cursor.execute('SELECT id, nome, cervejaria, estilo, teor_alcoolico, volume_ml, preco, quantidade_estoque, data_validade FROM cervejas;')
-results = cursor.fetchall()
-conn.close()
+# Retrieve the password from the environment variable
+password = os.getenv('PG_PASSWORD')
 
-for x in results:
-    print(x)
+# Check if the password was successfully retrieved
+if not password:
+    raise ValueError("No password provided. Please set the PG_PASSWORD environment variable.")
+
+# Debugging output to verify the password retrieval
+print(f"Password retrieved from environment: {password}")
+
+try:
+    conn = psycopg2.connect(
+        dbname="db-fdp",
+        user="postgres",
+        password=password,
+        host="database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com",
+        port="5432"
+    )
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, nome, cervejaria, estilo, teor_alcoolico, volume_ml, preco, quantidade_estoque, data_validade FROM cervejas;')
+    results = cursor.fetchall()
+    conn.close()
+
+    for x in results:
+        print(x)
+except psycopg2.OperationalError as e:
+    print(f"OperationalError: {e}")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+
+
+
