@@ -30,8 +30,6 @@ jobs:
           
       - name: Print environment variables
         run: |
-          echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}"
-          echo "PG_USER=${{ secrets.PG_USER }}"
           echo "PG_HOST_DB=${{ env.PG_HOST_DB }}"
           echo "PG_PORT=${{ env.PG_PORT }}"
           echo "PG_DATABASE=${{ env.PG_DB }}"
