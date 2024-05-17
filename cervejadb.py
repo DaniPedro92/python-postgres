@@ -3,13 +3,15 @@ import os
 
 password = os.getenv('PG_PASSWORD')
 user = os.getenv('PG_USER')
+host = os.getenv('PG_HOST_DB')
+
 
 try:
     conn = psycopg2.connect(
         dbname="db-fdp",
         user=user,
         password=password,
-        host="database-ea.cvkei0o2ei4o.eu-central-1.rds.amazonaws.com",
+        host=host,
         port="5432"
     )
 
