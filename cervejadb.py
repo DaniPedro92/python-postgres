@@ -2,6 +2,7 @@ import psycopg2
 from dotenv import load_dotenv
 import os
 from tabulate import tabulate
+from colorama import Fore, Style
 
 load_dotenv("test.env")
 
@@ -21,7 +22,23 @@ try:
 
     table_data = [list(row) for row in results]
     column_names = [desc[0] for desc in cursor.description]
-    print(tabulate(table_data, headers=column_names, tablefmt="grid"))
+
+    columm_color = {
+        'id': Fore.GREEN,
+        'nome': Fore.GREEN,
+        'cervejaria': Fore.GREEN,
+        'estilo': Fore.GREEN,
+        'teor_alcoolico': Fore.GREEN,
+        'volume_ml': Fore.GREEN,
+        'preco': Fore.GREEN,
+        'quantidade_estoque': Fore.GREEN,
+        'data_validade': Fore.GREEN
+    }
+
+
+    colored_column_names = [columm_color.get(column_name.lower(), '') + column_name + Style.RESET_ALL for column_name in column_names]
+    print(tabulate(table_data, headers=colored_column_names, tablefmt="grid"))
 
 except psycopg2.Error as e:
     print(f"Erro ao conectar ao PostgreSQL: {e}")
+
