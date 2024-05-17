@@ -24,6 +24,7 @@ jobs:
           pip install psycopg2-binary
           pip install python-dotenv
           pip install tabulate
+          pip install colorama
 
       - name: Create test.env file
         run: |
