@@ -8,6 +8,7 @@ on:
 
 jobs:
   import-db:
+    environment: development
     runs-on: ubuntu-latest
 
     steps:
