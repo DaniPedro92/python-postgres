@@ -4,12 +4,12 @@ import os
 password = os.getenv('PG_PASSWORD')
 user = os.getenv('PG_USER')
 host = os.getenv('PG_HOST_DB')
-dbname = os.getenv('PG_DB')
+#dbname = os.getenv('PG_DB')
 
 
 
 conn = psycopg2.connect(
-    dbname=dbname,
+    dbname="db-fdp",
     user=user,
     password=password,
     host=host,
