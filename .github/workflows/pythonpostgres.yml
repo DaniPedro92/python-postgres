@@ -29,11 +29,12 @@ jobs:
 
       - name: Create test.env file
         run: |
-          echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" >> test.env
+          echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" > test.env
           echo "PG_USER=${{ secrets.PG_USER }}" >> test.env
           echo "PG_HOST=${{ secrets.PG_HOST_DB }}" >> test.env
           echo "PG_PORT=${{ secrets.PG_PORT }}" >> test.env
           echo "PG_DATABASE=${{ secrets.PG_DB }}" >> test.env
+          cat test.env
 
       - name: Read database file
         run: python cervejadb.py
