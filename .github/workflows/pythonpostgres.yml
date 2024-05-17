@@ -30,9 +30,9 @@ jobs:
           
       - name: Print environment variables
         run: |
-          echo "PG_HOST_DB=${{ env.PG_HOST_DB }}"
-          echo "PG_PORT=${{ env.PG_PORT }}"
-          echo "PG_DATABASE=${{ env.PG_DB }}"
+          echo "PG_HOST_DB=${{ vars.PG_HOST_DB }}"
+          echo "PG_PORT=${{ vars.PG_PORT }}"
+          echo "PG_DATABASE=${{ vars.PG_DB }}"
 
       - name: Create test.env file
         run: |
